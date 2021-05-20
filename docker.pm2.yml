@@ -1,0 +1,27 @@
+apps:
+  - script : ./app/bin/www
+    name   : 'vcm-video-info'
+    instances: 2
+    exec_mode: cluster
+    min_uptime: '30s'
+    max_restarts: 20
+    pid_file: ./run.pid
+    # cwd: ''
+    error_file: './public/error.log'
+    out_file: './public/out.log'
+    # watch  : true
+    # 无须指定 env ，在 docker run 时 传入；否则缺省值在dockerfile中
+    # env    :
+    #   NODE_ENV: test
+    #   # 用于获取 集群配置的 域名（海外有 加速）
+    #   APOLLO_URL: 'http://apollo-dev.xiaoying.co:8080'
+    #   # 指定集群（如 海外某地区）
+    #   APOLLO_CLUSTER: 'local'
+    #   # 所有服务于该产品的 服务 都是这个 APP_ID
+    #   APOLLO_APP_ID: 'vcm-common'
+    #   # namespace 目前默认 application 无需配置
+    # env_production:
+    #   NODE_ENV: production
+    #   APOLLO_URL: 'http://apollo-pro-internal.xiaoying.co:8080'
+    #   APOLLO_CLUSTER: 'VIVAVIDEO-CN'
+    #   APOLLO_APP_ID: 'vcm-vivavideo'

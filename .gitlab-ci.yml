@@ -1,0 +1,25 @@
+image: 
+  name: registry.cn-hangzhou.aliyuncs.com/vivavideo/nodepm2:0.0.3
+  entrypoint: ["/bin/sh", "-c"]
+
+stages:
+  - test
+  - deploy
+
+# 包含 clean lint pretty release
+job-1:
+  stage: test
+  script:
+    - make init
+    # env： development 数据库 不走 Apollo 配置， 如需要请设置 test
+    - make test-uni NODE_ENV=test
+    - make test-cov NODE_ENV=test
+  coverage: '/^Statements\s*:\s*([^%]+)/'
+
+# build-src docker build push run 等流程
+job-2:
+  stage: deploy
+  script:
+    - make glab-build
+    - make publish
+    - make deploy

@@ -1,0 +1,69 @@
+definitions:
+  ResponseStatuses: &RESPONSE_STATUSES
+    type: string
+    enum:
+      - 20000
+
+  ResponseFailCodes: &RESPONSE_FAIL_CODES
+    type: string
+    enum:
+      - 10004
+      - 20003
+      - 20012
+
+  ResponseErrorCodes: &RESPONSE_ERROR_CODES
+    type: string
+    enum:
+      - 50000
+      - 50003
+      - 50006
+
+  SuccessResponse:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/ResponseStatuses'
+      message:
+        type: string
+      data:
+        type: object
+    required:
+      - code
+      - message
+      - data
+
+  FailResponse:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/ResponseFailCodes'
+      data:
+        type: object
+      message:
+        type: string
+    required:
+      - code
+      - message
+      - data
+    example:
+      code: 50005
+      data: null
+      message: '数据库xxx字段不存在.'
+
+  ErrorResponse:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/ResponseErrorCodes'
+      data:
+        type: object
+      message:
+        type: string
+    required:
+      - code
+      - message
+      - data
+    example:
+      code: 20003
+      data: null
+      message: '请求的xxx资源不存在.'

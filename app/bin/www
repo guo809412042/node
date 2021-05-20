@@ -1,0 +1,76 @@
+#!/usr/bin/env node
+/*
+ * @Date: 2020-03-19 21:55:56
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-10-21 09:42:41
+ * @Email: dongqi.zhao@quvideo.com
+ * @Copyright(c): QuVideo F2E Team
+ */
+
+const f2eApollo = require('@xy/f2e-apollo');
+const Log = console;
+process.env.NODE_ENV = process.env.NODE_ENV || 'base';
+const nodeEnv = process.env.NODE_ENV;
+
+//  ------- 默认缺省值 可以不用修改，docker run 的时候 - e 传入
+const apolloOptions = {
+  configServerUrl: process.env.APL_URL || 'http://apollo-dev.xiaoying.co:8080',
+  clusterName: process.env.APL_CLUSTER || 'qa',
+  appId: process.env.APL_APPID || 'vcm-common',
+  namespaceName: [ 'application', ],
+};
+// ------- 默认缺省值 可以不用修改，docker run 的时候 - e 传入
+
+/**
+ * ```bash
+ * # 启动方式有 如下好几种
+ *  NODE_ENV=test APP_PORT=5078 ./app/bin/www
+ *  make start NODE_ENV=base
+ *  npm run dev
+ * ```
+ */
+if (nodeEnv !== 'base') {
+  f2eApollo.setEnvByService(apolloOptions).then(() => {
+    // 直接注入 process[env] 中
+    // 获取注入的 Apollo 配置
+    const Apollo = process[nodeEnv] || {};
+    const AplRDSConf = {
+
+      redis: {
+        password: Apollo.VCM_PROXY_REDIS_PS,
+        host: Apollo.VCM_PROXY_REDIS_HOST,
+        port: Apollo.VCM_PROXY_REDIS_PORT,
+        family: 4,
+        ttl: 3600,
+      },
+
+      mysql: {
+        database: Apollo.VCM_POWER_DB_NAME,
+        user: Apollo.VCM_POWER_DB_USER,
+        password: Apollo.VCM_POWER_DB_PS,
+        host: Apollo.VCM_POWER_DB_HOST,
+      },
+
+    };
+    Log.log('\n\n %o  == apollo mysql == %o \n\n', apolloOptions, AplRDSConf);
+    global.apolloConf = apolloOptions;
+    global.AplRDSConf = AplRDSConf;
+    start();
+  });
+} else {
+  start();
+}
+
+/**
+ * 在没有抽象框架之前使用这个方式
+ */
+function start () {
+  const { app, onError, } = require('../');
+  const { port, host, env, } = require('../config');
+
+  const server = app.listen(port, host, () => {
+    Log.info({ event: 'execute', }, `API server listening on ${host}:${port}, in ${env}`);
+  });
+
+  server.on('error', onError);
+}

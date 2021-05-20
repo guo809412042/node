@@ -1,0 +1,99 @@
+{
+  "name": "@xy/vcm-tool-issue-nodejs",
+  "dockerName": "vcmtoolissuenodejs",
+  "version": "0.1.31",
+  "description": "vcm-tool-issue-nodejs",
+  "main": "./app/bin/www",
+  "scripts": {
+    "init": "make init",
+    "start": "make start NODE_ENV=base",
+    "dev": "NODE_ENV=dev nodemon -w app ./app/bin/www --quiet | bunyan",
+    "apldev": "make start NODE_ENV=test",
+    "eslint": "make eslint",
+    "format": "make pretty",
+    "test": "make test-uni",
+    "cov": "make test-cov",
+    "changelog": "make changelog",
+    "build": "make build",
+    "publish": "make publish",
+    "deploy": "make deploy"
+  },
+  "pre-commit": [
+    "eslint",
+    "format"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable"
+    }
+  },
+  "dependencies": {
+    "@hapi/joi": "^15.0.3",
+    "@koa/cors": "^2.2.3",
+    "@sentry/node": "^5.4.0",
+    "@xy/f2e-apollo": "^1.0.10",
+    "@xy/orm": "^0.3.3",
+    "@xy/util": "^1.2.3",
+    "ali-oss": "^6.13.1",
+    "axios": "^0.19.0",
+    "bunyan": "^1.8.12",
+    "humps": "^2.0.1",
+    "json-bigint": "^0.3.0",
+    "koa": "^2.6.2",
+    "koa-body": "^4.1.0",
+    "koa-compose": "^4.1.0",
+    "koa-favicon": "^2.0.1",
+    "koa-router": "7.4.0",
+    "node-fetch": "^2.6.1",
+    "node-xlsx": "^0.16.1",
+    "qs": "^6.9.1",
+    "sequelize": "^5.21.5",
+    "swagger-jsdoc": "^3.2.6",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
+    "babel-eslint": "^10.1.0",
+    "benchmark": "^2.1.4",
+    "conventional-changelog": "^3.0.5",
+    "conventional-changelog-cli": "^2.0.11",
+    "debug": "^4.1.0",
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-html": "^3.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.2.0",
+    "mm": "^2.4.1",
+    "mocha": "^4.1.0",
+    "nodemon": "^1.18.7",
+    "nyc": "^11.9.0",
+    "prettier": "^1.15.2",
+    "should": "^13.2.3",
+    "supertest": "^3.4.2"
+  },
+  "homepage": "http://gitlab.quvideo.com/WEB/vcm-tool-issue-nodejs",
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.quvideo.com/WEB/vcm-tool-issue-nodejs.git"
+  },
+  "bugs": {
+    "url": "http://gitlab.quvideo.com/WEB/vcm-tool-issue-nodejs/issues"
+  },
+  "keywords": [
+    "nodejs",
+    "@xy",
+    "file",
+    "chunk",
+    "theads",
+    "upload"
+  ],
+  "engines": {
+    "node": ">= 10.15.0"
+  },
+  "author": "f2e@quvideo.com",
+  "license": "MIT"
+}

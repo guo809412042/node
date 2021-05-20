@@ -1,0 +1,11 @@
+{
+  "videoUrl": "http://taobao.com/aa/vv/xx.html",
+  "configPath":"asdasdasdsad",
+  "width":"200px",
+  "height": "150px",
+  "duration":"200000",
+  "title":"压力测试",
+  "desc":"视频信息～～",
+  "posterImg":"http://gitlab.quvideo.com/uploads/-/system/user/avatar/149/avatar.png",
+  "user": "siege"
+}

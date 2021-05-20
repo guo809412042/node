@@ -1,0 +1,10 @@
+http://localhost:5000/api/video/9c35e62a-a373-43fb-a1c8-dd736fcb17b5
+http://localhost:5000/api/video/9c35e62a-a373-43fb-a1c8-dd736fcb17b5
+http://localhost:5000/api/video/014eee34-e188-4609-9306-ba902a898c82
+http://localhost:5000/api/video/6fb97197-1d41-4a8e-9676-770f3aeebb80
+http://localhost:5000/api/video/a9a43df6-fa8e-4a66-afb9-f363535e4568
+http://localhost:5000/api/videos/search?type=uuid&value=a9a43df6-fa8e-4a66-afb9-f363535e4568
+http://localhost:5000/api/videos/search?type=width&value=11px
+http://localhost:5000/api/videos/search?type=title&value=myvideo
+http://localhost:5000/api/videos/search?type=duration&value=1
+http://localhost:5000/api/videos/search?type=width&value=200dp
